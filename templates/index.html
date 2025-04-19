@@ -43,7 +43,9 @@ def factorial(n):
                 mermaid.init(undefined, document.getElementById("mermaid"));
     </script>
     {% else %}
-    <img src="/static/images/demo.png" alt="Demo Flowchart" style="height: 200px;">
+    <div class="mermaid" id="mermaid">
+        <img src="/static/images/demo.png" alt="Demo Flowchart" style="height: 200px;">
+    </div>
     {% endif %}
     <div class="info-icon"><i id="info" class="fa-solid fa-info"></i></div>
     <script>
