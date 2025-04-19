@@ -34,19 +34,21 @@ def factorial(n):
         <button type="submit" class="submit" id="submit">Generate Flowchart &nbsp;<i class="fa-solid fa-chart-diagram"></i></button>
     </form>
     <h2 class="heading">Flowchart:</h2>
+    {% if mermaid_code %}
     <div class="mermaid" id="mermaid">
         {{ mermaid_code }}
     </div>
+    <script type="module">
+                import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+                mermaid.init(undefined, document.getElementById("mermaid"));
+    </script>
+    {% else %}
+    <img src="/static/images/demo.png" alt="Demo Flowchart" style="height: 200px;">
+    {% endif %}
     <div class="info-icon"><i id="info" class="fa-solid fa-info"></i></div>
     <script>
         code=document.getElementById('code');
         mermaid=document.getElementById('mermaid');
-        if(code === null){
-            const img=document.createElement("img");
-            img.src="/static/images/demo.png"
-            img.style.height="200px";
-            mermaid.appendChild(img);
-        }
 
         document.addEventListener("keydown",function(e){
             if(e.ctrlKey && e.key=="Enter"){
