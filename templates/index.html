@@ -49,11 +49,17 @@ def factorial(n):
         {% endif %}
     </div>
     <div class="explanation-box">
-        <h3 class="heading">Code Explanation:</h3>
-        {% if explanation %}
-        <p class="explain">{{ explanation }}</p>
+    {% for paragraph in explanation.split('\n\n') %}
+        <div class="explanation-section">
+            {% if paragraph.startswith('[') %}
+                <div class="explanation-title">{{ paragraph.split(']')[0]|replace('[', '') }}:</div>
+                <div>{{ paragraph.split(']')[1] }}</div>
+            {% else %}
+                <div>{{ paragraph }}</div>
+            {% endif %}
+        </div>
+    {% endfor %}
     </div>
-    {% endif %}
     <div class="info-icon"><i id="info" class="fa-solid fa-info"></i></div>
     <script>
         code=document.getElementById('code');
