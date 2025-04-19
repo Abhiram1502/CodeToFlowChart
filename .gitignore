@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyd
+*.pyo
+*.so
+*.egg-info/
+*.egg
+.python-version
+build/
+dist/
+pip-wheel-metadata/
+venv/
+.venv/
+env/
+ENV/
+
+# Environment variables (CRITICAL for security)
+.env
+.env.*
+local.env
+secrets.*
+config.py
+
+# Flask
+instance/
+.webassets-cache
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.bak
+
+# System
+.DS_Store
+Thumbs.db
+
+# Logs and databases
+*.log
+*.sqlite
+*.db
+
+# Render.com (if deploying there)
+render.yaml
