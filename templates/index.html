@@ -48,9 +48,9 @@ def factorial(n):
             <img src="/static/images/demo.png" alt="Demo Flowchart" style="height: 200px;">
         {% endif %}
     </div>
-    {% if explanation %}
     <div class="explanation-box">
         <h3>Code Explanation:</h3>
+        {% if explanation %}
         <p>{{ explanation }}</p>
     </div>
     {% endif %}
