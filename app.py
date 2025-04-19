@@ -7,10 +7,9 @@ from converter import python_to_mermaid
 app = Flask(__name__)
 CORS(app)
 
-# Configure Gemini - Updated for 2.0 Flash
 try:
     genai.configure(api_key=os.getenv('GOOGLE_API_KEY'))
-    model = genai.GenerativeModel('gemini-1.5-flash')  # Updated for Flash model
+    model = genai.GenerativeModel('gemini-1.5-flash')  
     print("✅ Gemini 2.0 Flash configured successfully")
 except Exception as e:
     print(f"Gemini config failed: {str(e)}")
@@ -25,34 +24,47 @@ def index():
         mermaid_code = python_to_mermaid(code)
         
         if model and code.strip():
-    try:
-        prompt = f"""Analyze this Python code and provide a well-structured explanation:
+            try:
+                prompt = f"""Provide a detailed yet concise explanation of this Python code:
 
-        {code}
+                {code}
 
-        Format your response EXACTLY as follows:
+                Format your response EXACTLY as follows:
 
-        [Purpose]
-        <1-2 sentence description>
+                # Code Purpose
+                <1-2 sentence overview of what the code accomplishes>
 
-        [Key Components]
-        • <component 1> - <description>
-        • <component 2> - <description>
-        • <component 3> - <description>
+                # Key Components
+                • <component 1> - <description>
+                • <component 2> - <description>
+                • <component 3> - <description>
 
-        [Execution Flow]
-        1. <step 1>
-        2. <step 2>
-        3. <step 3>
+                # Execution Flow
+                1. <step 1 description>
+                2. <step 2 description>
+                3. <step 3 description>
 
-        [Example]
-        • Input: <sample input>
-        • Output: <expected output>"""
-        
-        response = model.generate_content(prompt)
-        explanation = response.text
+                # Example Usage
+                Input: <sample input value>
+                Output: <expected output>
+
+                Notes:
+                - Use bullet points (•) for components
+                - Number the execution steps
+                - Keep technical terms simple
+                - Provide a realistic input/output example"""
+                
+                response = model.generate_content(prompt)
+                explanation = response.text
+
+                explanation = explanation.replace('**', '').replace('*', '•')
+                
             except Exception as e:
-                explanation = f"⚠️ Explanation error: {str(e)}"
+                explanation = f"""# Explanation Error
+                Could not generate analysis.
+
+                # Technical Details
+                {str(e)}"""
 
     return render_template("index.html",
         code=code,
