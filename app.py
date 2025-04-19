@@ -13,7 +13,7 @@ try:
     model = genai.GenerativeModel('gemini-1.5-flash')  # Updated for Flash model
     print("✅ Gemini 2.0 Flash configured successfully")
 except Exception as e:
-    print(f"❌ Gemini config failed: {str(e)}")
+    print(f"Gemini config failed: {str(e)}")
     model = None
 
 @app.route("/", methods=["GET", "POST"])
@@ -25,12 +25,32 @@ def index():
         mermaid_code = python_to_mermaid(code)
         
         if model and code.strip():
-            try:
-                response = model.generate_content(
-                    f"Explain this Python code concisely:\n\n{code}\n\n"
-                    "Focus on:\n1. Purpose\n2. Key functions\n3. Flow"
-                )
-                explanation = response.text
+    try:
+        prompt = f"""Analyze this Python code and provide a well-structured explanation:
+
+        {code}
+
+        Format your response EXACTLY as follows:
+
+        [Purpose]
+        <1-2 sentence description>
+
+        [Key Components]
+        • <component 1> - <description>
+        • <component 2> - <description>
+        • <component 3> - <description>
+
+        [Execution Flow]
+        1. <step 1>
+        2. <step 2>
+        3. <step 3>
+
+        [Example]
+        • Input: <sample input>
+        • Output: <expected output>"""
+        
+        response = model.generate_content(prompt)
+        explanation = response.text
             except Exception as e:
                 explanation = f"⚠️ Explanation error: {str(e)}"
 
