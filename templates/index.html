@@ -33,12 +33,10 @@ def factorial(n):
         return n * factorial(n - 1)        ">{{ code }}</textarea><br>
         <button type="submit" class="submit" id="submit">Generate Flowchart &nbsp;<i class="fa-solid fa-chart-diagram"></i></button>
     </form>
-    {% if mermaid_code %}
     <h2 class="heading">Flowchart:</h2>
     <div class="mermaid" id="mermaid">
         {{ mermaid_code }}
     </div>
-    {% endif %}
     <div class="info-icon"><i id="info" class="fa-solid fa-info"></i></div>
     <script>
         code=document.getElementById('code');
