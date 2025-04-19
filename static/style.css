@@ -124,3 +124,9 @@ button{
     margin-left: 30px;
     color: white;
 }
+.explain{
+    background-color: white;
+    padding: 20px;
+    margin:20px;
+    border-radius:8px;
+}
