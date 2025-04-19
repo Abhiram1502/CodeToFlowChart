@@ -34,19 +34,20 @@ def factorial(n):
         <button type="submit" class="submit" id="submit">Generate Flowchart &nbsp;<i class="fa-solid fa-chart-diagram"></i></button>
     </form>
     <h2 class="heading">Flowchart:</h2>
-    {% if mermaid_code %}
-    <div class="mermaid" id="mermaid">
-        {{ mermaid_code }}
-    </div>
-    <script type="module">
+    <div id="flowchart-container">
+        {% if mermaid_code %}
+            <div class="mermaid" id="mermaid">
+                {{ mermaid_code }}
+            </div>
+            <script type="module">
+                // Re-run Mermaid after dynamic content loads
                 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
                 mermaid.init(undefined, document.getElementById("mermaid"));
-    </script>
-    {% else %}
-    <div class="mermaid" id="mermaid">
-        <img src="/static/images/demo.png" alt="Demo Flowchart" style="height: 200px;">
+            </script>
+        {% else %}
+            <img src="/static/images/demo.png" alt="Demo Flowchart" style="height: 200px;">
+        {% endif %}
     </div>
-    {% endif %}
     <div class="info-icon"><i id="info" class="fa-solid fa-info"></i></div>
     <script>
         code=document.getElementById('code');
