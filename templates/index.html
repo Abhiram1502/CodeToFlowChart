@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/static/style.css">
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <link rel="icon" href="images/pyicon.png">
+    <link rel="icon" href="/templates/images/pyicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script type="module">
         import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
@@ -15,7 +15,7 @@
 </head>
 <body>
     <nav>
-        <img src="images/PYLOGO.png" alt="" class="logo">
+        <img src="/templates/images/PYLOGO.png" alt="" class="logo">
         <div class="flex-row">
             <button id="downloadpng">Download as Png</button>
             <button id="downloadpdf">Download as Pdf</button>
@@ -43,7 +43,7 @@ def factorial(n):
         mermaid=document.getElementById('mermaid');
         if(code === null){
             const img=document.createElement("img");
-            img.src="images/demo.png"
+            img.src="/templates/images/demo.png"
             img.style.height="200px";
             mermaid.appendChild(img);
         }
