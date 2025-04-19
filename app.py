@@ -7,12 +7,13 @@ from converter import python_to_mermaid
 app = Flask(__name__)
 CORS(app)
 
-# Configure Gemini - will use Render's environment variables
+# Configure Gemini - Updated for 2.0 Flash
 try:
     genai.configure(api_key=os.getenv('GOOGLE_API_KEY'))
-    model = genai.GenerativeModel('gemini-1.0-pro')
+    model = genai.GenerativeModel('gemini-1.5-flash')  # Updated for Flash model
+    print("✅ Gemini 2.0 Flash configured successfully")
 except Exception as e:
-    print(f"Gemini init error: {str(e)}")
+    print(f"❌ Gemini config failed: {str(e)}")
     model = None
 
 @app.route("/", methods=["GET", "POST"])
@@ -26,12 +27,12 @@ def index():
         if model and code.strip():
             try:
                 response = model.generate_content(
-                    f"Explain this Python code:\n\n{code}\n\n"
-                    "Focus on:\n1. Purpose\n2. Key components\n3. Flow"
+                    f"Explain this Python code concisely:\n\n{code}\n\n"
+                    "Focus on:\n1. Purpose\n2. Key functions\n3. Flow"
                 )
                 explanation = response.text
             except Exception as e:
-                explanation = f"Explanation error: {str(e)}"
+                explanation = f"⚠️ Explanation error: {str(e)}"
 
     return render_template("index.html",
         code=code,
