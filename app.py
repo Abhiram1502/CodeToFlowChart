@@ -7,7 +7,6 @@ from converter import python_to_mermaid
 app = Flask(__name__)
 CORS(app)
 
-# Configure Gemini
 try:
     genai.configure(api_key=os.getenv('GOOGLE_API_KEY'))
     model = genai.GenerativeModel('gemini-1.5-flash')
@@ -32,21 +31,32 @@ def index():
 
                 Format your response EXACTLY as follows:
 
+                **Code Name**
+
                 **Code Purpose**
+                
                 <1-2 sentence description>
 
                 **Key Components**
+                
                 1. • <component 1> - <description>
+                
                 2. • <component 2> - <description>
+                
                 3. • <component 3> - <description>
 
                 **Execution Flow**
+                
                 1. <step 1 description>
+                
                 2. <step 2 description>
+                
                 3. <step 3 description>
 
                 **Example Usage**
+                
                 • Input: <sample input>
+                
                 • Output: <expected output>
 
                 Requirements:
@@ -57,9 +67,6 @@ def index():
                 
                 response = model.generate_content(prompt)
                 explanation = response.text
-                
-                # Ensure consistent formatting
-                explanation = explanation.replace('*', '•')  # Standardize bullets
                 
             except Exception as e:
                 explanation = f"""**Error**
