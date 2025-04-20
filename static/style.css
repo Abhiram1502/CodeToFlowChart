@@ -130,26 +130,25 @@ button{
     margin:20px;
     border-radius:8px;
 }
-
 .explanation-box {
-        background: white;
-        padding: 20px;
-        border-radius: 8px;
-        margin: 20px 0;
-        font-family: 'Fira Code', monospace;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px;
+    font-family: 'Fira Code', monospace;
 }
-    .explanation-section {
-        margin-bottom: 15px;
-    }
-    .explanation-title {
-        color: #E0095F;
-        font-weight: bold;
-        margin-bottom: 8px;
-    }
-    .explanation-list {
-        margin-left: 20px;
-        list-style-type: none;
-    }
+.explanation-section {
+    margin-bottom: 15px;
+}
+.explanation-title {
+    color: #E0095F;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+.explanation-list {
+    margin-left: 20px;
+    list-style-type: none;
+}
     .explanation-list li {
         margin-bottom: 5px;
         position: relative;
