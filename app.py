@@ -7,10 +7,11 @@ from converter import python_to_mermaid
 app = Flask(__name__)
 CORS(app)
 
+# Configure Gemini
 try:
     genai.configure(api_key=os.getenv('GOOGLE_API_KEY'))
-    model = genai.GenerativeModel('gemini-1.5-flash')  
-    print("✅ Gemini 2.0 Flash configured successfully")
+    model = genai.GenerativeModel('gemini-1.5-flash')
+    print("Gemini configured successfully")
 except Exception as e:
     print(f"Gemini config failed: {str(e)}")
     model = None
@@ -25,45 +26,46 @@ def index():
         
         if model and code.strip():
             try:
-                prompt = f"""Provide a detailed yet concise explanation of this Python code:
+                prompt = f"""Analyze this Python code and provide a structured explanation:
 
                 {code}
 
                 Format your response EXACTLY as follows:
 
-                # Code Purpose
-                <1-2 sentence overview of what the code accomplishes>
+                **Code Purpose**
+                <1-2 sentence description>
 
-                # Key Components
-                • <component 1> - <description>
-                • <component 2> - <description>
-                • <component 3> - <description>
+                **Key Components**
+                1. • <component 1> - <description>
+                2. • <component 2> - <description>
+                3. • <component 3> - <description>
 
-                # Execution Flow
+                **Execution Flow**
                 1. <step 1 description>
                 2. <step 2 description>
                 3. <step 3 description>
 
-                # Example Usage
-                Input: <sample input value>
-                Output: <expected output>
+                **Example Usage**
+                • Input: <sample input>
+                • Output: <expected output>
 
-                Notes:
-                - Use bullet points (•) for components
-                - Number the execution steps
-                - Keep technical terms simple
-                - Provide a realistic input/output example"""
+                Requirements:
+                - Use **double asterisks** for section headings
+                - Number all bullet points sequentially
+                - Keep descriptions concise but clear
+                - Provide a practical input/output pair"""
                 
                 response = model.generate_content(prompt)
                 explanation = response.text
-
-                explanation = explanation.replace('**', '').replace('*', '•')
+                
+                # Ensure consistent formatting
+                explanation = explanation.replace('*', '•')  # Standardize bullets
                 
             except Exception as e:
-                explanation = f"""# Explanation Error
-                Could not generate analysis.
+                explanation = f"""**Error**
+                Could not generate explanation.
 
-                # Technical Details
+                **Details**
                 {str(e)}"""
 
     return render_template("index.html",
