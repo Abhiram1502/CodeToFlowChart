@@ -149,14 +149,14 @@ button{
     margin-left: 20px;
     list-style-type: none;
 }
-    .explanation-list li {
-        margin-bottom: 5px;
-        position: relative;
-        padding-left: 15px;
-    }
-    .explanation-list li:before {
-        content: "•";
-        color: #2E86AB;
-        position: absolute;
-        left: 0;
-    }
+.explanation-list li {
+    margin-bottom: 5px;
+    position: relative;
+    padding-left: 15px;
+}
+.explanation-list li:before {
+    content: "•";
+    color: #2E86AB;
+    position: absolute;
+    left: 0;
+}
